@@ -13,20 +13,28 @@ public class Upgrade : MonoBehaviour
     public int scoreUpgrade;
     LevelController levelController;
 
+    public int count;
     void Start()
     {
         levelController = FindObjectOfType<LevelController>();
         iconsUpdate();
     }
+
+    public void OnEnable()
+    {
+        iconsUpdate();
+    }
+
     public void productUpgrade()
     {
-        int count = PlayerPrefs.GetInt(product);
+       
+            //PlayerPrefs.GetInt(product);
 
         if (count < UpgradeLimit)
         {
             levelController.ScoreUpgrade--;
             count++;
-            PlayerPrefs.SetInt(product, count);
+            //PlayerPrefs.SetInt(product, count);
 
             emptyIcon[count - 1].overrideSprite = fillIcon;
         }
@@ -34,9 +42,9 @@ public class Upgrade : MonoBehaviour
 
     void iconsUpdate()
     {
-        int count = PlayerPrefs.GetInt(product);
+        //PlayerPrefs.GetInt(product);
 
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             emptyIcon[i].overrideSprite = fillIcon;
         }

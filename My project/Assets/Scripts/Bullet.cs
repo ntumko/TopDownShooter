@@ -7,23 +7,26 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float lifetime;
     public float distance;
-    public int damage;
+    //public int damage;
     public int defaultdamage;
     public LayerMask whatIsSolid;
     public Teamenum team;
 
     [SerializeField] bool enemyBullet;
+    [SerializeField] BilletData billetData;
 
     private void Start()
     {
         Invoke("DestroyBullet", lifetime);
 
-        if (PlayerPrefs.HasKey("Hero Gun") == false)
-        {
-            if (damage == 0) PlayerPrefs.SetInt("Hero Gun", 7);
-        }
+        /* if (PlayerPrefs.HasKey("Hero Gun") == false)
+         {
+             if (damage == 0) PlayerPrefs.SetInt("Hero Gun", 7);
+         }
 
-        StatsUpdate();
+         StatsUpdate();*/
+
+
     }
 
     private void Update()
@@ -68,16 +71,13 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage + defaultdamage);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(billetData.damage + defaultdamage);
         }
         if (collision.gameObject.CompareTag("Player") && enemyBullet)
         {
-            collision.gameObject.GetComponent<Player>().ChangeHealth(-damage);
+            collision.gameObject.GetComponent<Player>().ChangeHealth(-billetData.damage);
         }
         DestroyBullet();
     }
-    public void StatsUpdate()
-    {
-        damage = PlayerPrefs.GetInt("Hero Gun");
-    }
+   
 }

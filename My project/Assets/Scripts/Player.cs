@@ -17,13 +17,19 @@ public class Player : MonoBehaviour
 
     private bool facingRight = true;
 
+    private void Save()
+    {
+        
+    }
+
     void Start()
     {
+       
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
 
-        StatsUpdate();
+        //StatsUpdate();
     }
 
   
@@ -77,10 +83,8 @@ public class Player : MonoBehaviour
         health += healthValue;
     }
 
-    public void StatsUpdate()
+    public void AddSpeed()
     {
-        if (speed == 0) PlayerPrefs.SetInt("Hero Speed", 1);
-
-        speed = PlayerPrefs.GetInt("Hero Speed");
+        speed++;
     }
 }
